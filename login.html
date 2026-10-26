@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Login</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="login-page" data-page="login">
+    <div class="login-card">
+      <div class="login-header">
+        <img class="login-logo" src="../images/logo.svg" alt="Logo" />
+        <span class="eyebrow">Teacher Portal</span>
+        <h1>Teacher Login</h1>
+      </div>
+
+      <form data-login-form data-role="teacher">
+        <div>
+          <label for="teacherId">Teacher ID or email</label>
+          <input id="teacherId" name="id" type="text" autocomplete="username" placeholder="Enter Teacher ID or email" required />
+        </div>
+
+        <div>
+          <label for="teacherPassword">Password</label>
+          <input id="teacherPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter Password" required />
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <a href="#" class="text-link" data-request-password>Request new password from admin</a>
+        </div>
+
+        <p class="form-message" aria-live="polite"></p>
+      </form>
+      <a href="../index.html" class="text-link">Back to homepage</a>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/supabase-sync.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Profile</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body data-page="teacher-profile">
+    <div class="page-shell">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-brand"><img class="brand-logo" src="../images/logo-white.svg" alt="" /><span>Teacher</span></div>
+          <button class="btn btn-secondary" type="button" data-mobile-menu>Menu</button>
+        </div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a class="active" href="profile.html">My Profile</a>
+          <a href="students.html">My Classes</a>
+          <a href="subjects.html">My Subjects</a>
+          <a href="enter-scores.html">Enter Scores</a>
+          <a href="results.html">Academic Results</a>
+          <a href="cbt-questions.html">CBT Questions</a>
+          <a href="activities.html">Activities</a>
+          <a href="../index.html" onclick="logout()">Logout</a>
+        </nav>
+      </aside>
+      <main class="main-panel">
+        <header class="topbar">
+          <h1 class="page-title">My Profile</h1>
+          <div class="topbar-actions">
+            <span class="school-name-label" data-school-name>School Name</span>
+            <span class="user-chip">Teacher</span>
+            <button class="btn btn-secondary" type="button" onclick="logout()">Logout</button>
+          </div>
+        </header>
+        <div class="content">
+          <section class="card profile-card">
+            <div class="profile-summary">
+              <div class="profile-photo-wrap">
+                <img id="profilePhoto" class="profile-photo" alt="Profile" hidden />
+                <div id="profilePhotoPlaceholder" class="profile-photo-placeholder" aria-hidden="true">Photo</div>
+              </div>
+              <div class="profile-heading">
+                <span class="eyebrow" id="profileRole">Teacher</span>
+                <h2 id="profileName">Loading profile...</h2>
+                <p class="muted">ID: <span id="profileId"></span></p>
+                <label class="btn btn-secondary profile-upload" for="profilePhotoInput">Update photo</label>
+                <input id="profilePhotoInput" class="profile-photo-input" type="file" accept="image/*" />
+              </div>
+            </div>
+            <div class="profile-details">
+              <h3>Profile details</h3>
+              <dl class="profile-detail-grid">
+                <div class="profile-detail"><dt>Class</dt><dd data-profile-field="className"></dd></div>
+                <div class="profile-detail"><dt>Subjects</dt><dd data-profile-field="subjects"></dd></div>
+                <div class="profile-detail"><dt>Session</dt><dd data-profile-field="session"></dd></div>
+                <div class="profile-detail"><dt>Status</dt><dd data-profile-field="status"></dd></div>
+                <div class="profile-detail"><dt>Date of birth</dt><dd data-profile-field="dateOfBirth"></dd></div>
+              </dl>
+              <p class="form-message" id="profilePhotoMessage" aria-live="polite"></p>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/supabase-sync.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

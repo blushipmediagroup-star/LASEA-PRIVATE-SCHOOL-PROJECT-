@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CBT Test</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <style>
+      .question-panel {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+        padding: 1.5rem;
+      }
+
+      .question-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        margin-bottom: 1.2rem;
+      }
+
+      .question-text {
+        font-size: 1.2rem;
+        margin-bottom: 1.4rem;
+      }
+
+      .option-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        background: #f8fafc;
+        color: var(--secondary);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 0.9rem 1rem;
+        text-align: left;
+        margin-bottom: 0.8rem;
+      }
+
+      .option-button.selected {
+        border-color: var(--primary);
+        background: var(--primary-soft);
+      }
+
+      .option-letter {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #fff;
+        border: 1px solid var(--border);
+        font-weight: 700;
+      }
+
+      .question-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .question-number {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: #fff;
+        color: var(--secondary);
+        cursor: pointer;
+      }
+
+      .question-number.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .navigation-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+    </style>
+  </head>
+  <body data-page="student-cbt">
+    <div class="page-shell">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-brand"><img class="brand-logo" src="../images/logo-white.svg" alt="" /><span>Student</span></div>
+          <button class="btn btn-secondary" type="button" data-mobile-menu>☰</button>
+        </div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="profile.html">My Profile</a>
+          <a href="subjects.html">My Subjects</a>
+          <a class="active" href="cbt.html">Take CBT</a>
+          <a href="cbt-result.html">CBT Results</a>
+          <a href="academic-results.html">Academic Results</a>
+          <a href="activities.html">Activities</a>
+          <a href="../index.html" onclick="logout()">Logout</a>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <h1 class="page-title" id="cbtPageTitle">CBT Test</h1>
+          <div class="topbar-actions">
+            <span class="user-chip">Time Remaining: <strong id="timerText">24:35</strong></span>
+          </div>
+        </header>
+
+        <div class="content">
+          <section id="cbtEmptyState" class="card" hidden>
+            <h2>No test selected</h2>
+            <p>This CBT test is unavailable. Choose an upcoming test from your dashboard.</p>
+            <a class="btn btn-primary" href="dashboard.html">Go to dashboard</a>
+          </section>
+          <div class="question-panel">
+            <div class="question-top">
+              <div>
+                <span class="eyebrow" id="questionSubject">Mathematics CBT</span>
+              </div>
+              <strong id="questionIndexText">Question 1 of 6</strong>
+            </div>
+
+            <div id="questionText" class="question-text">Loading question...</div>
+            <div id="questionOptions"></div>
+            <div id="questionNav" class="question-nav"></div>
+
+            <div class="navigation-row">
+              <button id="previousQuestion" type="button" class="btn btn-secondary">Previous</button>
+              <button id="nextQuestion" type="button" class="btn btn-primary">Next</button>
+              <button id="submitTest" type="button" class="btn btn-danger">Submit Test</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal" id="confirmSubmitModal">
+      <div class="modal-box">
+        <h3>Submit Test?</h3>
+        <p>Once submitted, the test will be finalized and you will be redirected to the result page.</p>
+        <div class="modal-actions">
+          <button type="button" id="cancelSubmit" class="btn btn-secondary">Cancel</button>
+          <button type="button" id="confirmSubmit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/supabase-sync.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

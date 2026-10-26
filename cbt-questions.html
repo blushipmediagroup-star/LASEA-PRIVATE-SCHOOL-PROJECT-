@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CBT Questions</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body data-page="teacher-cbt-questions">
+    <div class="page-shell">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-brand"><img class="brand-logo" src="../images/logo-white.svg" alt="" /><span>Teacher</span></div>
+          <button class="btn btn-secondary" type="button" data-mobile-menu>☰</button>
+        </div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="students.html">My Classes</a>
+          <a href="subjects.html">My Subjects</a>
+          <a href="students.html">Students</a>
+          <a href="enter-scores.html">Enter Scores</a>
+          <a href="results.html">Academic Results</a>
+          <a class="active" href="cbt-questions.html">CBT Questions</a>
+          <a href="activities.html">Activities</a>
+          <a href="../index.html" onclick="logout()">Logout</a>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <h1 class="page-title">CBT Questions</h1>
+          <div class="topbar-actions"><span class="user-chip">Teacher</span><button class="btn btn-secondary" type="button" onclick="logout()">Logout</button></div>
+        </header>
+
+        <div class="content">
+          <section class="card">
+            <div class="card-header"><h3>Add Question</h3></div>
+            <form id="questionForm" class="form-grid">
+              <div>
+                <label for="questionTestTitle">Test Title</label>
+                <input id="questionTestTitle" type="text" placeholder="e.g. Mid-term Mathematics Test" required />
+              </div>
+              <div>
+                <label for="questionSubject">Subject</label>
+                <select id="questionSubject" required></select>
+              </div>
+              <div>
+                <label for="questionClass">Class</label>
+                <select id="questionClass" required></select>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <label for="questionText">Question</label>
+                <textarea id="questionText" required></textarea>
+              </div>
+              <div><label for="optionA">Option A</label><input id="optionA" type="text" /></div>
+              <div><label for="optionB">Option B</label><input id="optionB" type="text" /></div>
+              <div><label for="optionC">Option C</label><input id="optionC" type="text" /></div>
+              <div><label for="optionD">Option D</label><input id="optionD" type="text" /></div>
+              <div>
+                <label for="correctAnswer">Correct Answer</label>
+                <select id="correctAnswer"><option>A</option><option>B</option><option>C</option><option>D</option></select>
+              </div>
+              <div style="grid-column: 1 / -1; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button class="btn btn-primary" id="saveQuestionButton" type="submit">Save Question</button>
+                <button class="btn btn-secondary" id="cancelQuestionEdit" type="button" hidden>Cancel Edit</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="card" style="margin-top: 1rem;">
+            <div class="card-header"><h3>Import Questions from CSV</h3></div>
+            <div class="form-grid">
+              <div>
+                <label for="csvTestTitle">Test Title (used when the file has no test_title column)</label>
+                <input id="csvTestTitle" type="text" placeholder="e.g. Mid-term Mathematics Test" />
+              </div>
+              <div>
+                <label for="csvSubject">Subject (default)</label>
+                <select id="csvSubject"></select>
+              </div>
+              <div>
+                <label for="csvClass">Class (default)</label>
+                <select id="csvClass"></select>
+              </div>
+              <div style="grid-column: 1 / -1;">
+                <label for="csvFile">CSV file</label>
+                <input id="csvFile" type="file" accept=".csv,text/csv" />
+                <p style="margin: 0.5rem 0 0; color: var(--muted);">First row must have: question, option_a, option_b, option_c, option_d, answer (A, B, C or D). Optional columns: test_title, subject, class. In Excel, save as "CSV UTF-8".</p>
+              </div>
+              <div style="grid-column: 1 / -1; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <button class="btn btn-primary" id="importCsvButton" type="button">Import Questions</button>
+                <button class="btn btn-secondary" id="downloadCsvTemplate" type="button">Download CSV Template</button>
+              </div>
+              <p id="csvImportMessage" style="grid-column: 1 / -1; margin: 0; white-space: pre-line;" aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section class="table-card" style="margin-top: 1rem;">
+            <div class="card-header"><h3>Question List</h3></div>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Test title</th>
+                    <th>Subject</th>
+                    <th>Class</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="questionTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <div class="modal" id="deleteQuestionModal">
+      <div class="modal-box">
+        <h3>Delete this question?</h3>
+        <p>This removes the question from its test. Existing submitted results remain unchanged.</p>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" id="cancelQuestionDelete" type="button">Cancel</button>
+          <button class="btn btn-danger" id="confirmQuestionDelete" type="button">Delete Question</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/supabase-sync.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>

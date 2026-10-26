@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Settings</title>
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body data-page="admin-settings">
+    <div class="page-shell">
+      <aside class="sidebar">
+        <div class="sidebar-header"><div class="sidebar-brand"><img class="brand-logo" src="../images/logo-white.svg" alt="" /><span>Admin</span></div><button class="btn btn-secondary" type="button" data-mobile-menu>☰</button></div>
+        <nav>
+          <a href="dashboard.html">Dashboard</a>
+          <a href="students.html">Students</a>
+          <a href="teachers.html">Teachers</a>
+          <a href="classes.html">Classes</a>
+          <a href="subjects.html">Subjects</a>
+          <a href="cbt.html">CBT</a>
+          <a href="academic-results.html">Academic Results</a>
+          <a href="activities.html">Activities</a>
+          <a class="active" href="settings.html">Settings</a>
+          <a href="../index.html" onclick="logout()">Logout</a>
+        </nav>
+      </aside>
+      <main class="main-panel">
+        <header class="topbar"><h1 class="page-title">Settings</h1><div class="topbar-actions"><span class="user-chip">Admin</span><button class="btn btn-secondary" type="button" onclick="logout()">Logout</button></div></header>
+        <div class="content">
+          <section class="card">
+            <div class="card-header"><h3>School Configuration</h3></div>
+            <form id="schoolSettingsForm">
+              <div class="filter-group">
+                <label for="schoolNameSetting">Official school name</label>
+                <input id="schoolNameSetting" type="text" maxlength="120" autocomplete="organization" required />
+              </div>
+              <div class="score-save-actions">
+                <button class="btn btn-primary" type="submit">Save School Name</button>
+                <span id="settingStatus" role="status" aria-live="polite">This name appears on student result sheets.</span>
+              </div>
+            </form>
+          </section>
+
+          <section class="card" style="margin-top: 1rem; border-color: var(--danger);">
+            <div class="card-header"><h3>Erase Data</h3></div>
+            <p class="muted">Permanently deletes all students, teachers, academic results, CBT questions and results, report card details and activity history. Admin accounts and the school name are kept.</p>
+            <div class="filter-group" style="margin-top: 0.75rem;">
+              <label><input id="eraseStructure" type="checkbox" /> Also delete all classes and subjects</label>
+            </div>
+            <div class="score-save-actions">
+              <button class="btn btn-danger" id="eraseDataButton" type="button">Erase Data</button>
+              <span id="eraseStatus" role="status" aria-live="polite">You will be asked to type ERASE to confirm.</span>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase-config.js"></script>
+    <script src="../js/supabase-sync.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>
